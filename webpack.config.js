@@ -16,6 +16,7 @@ module.exports = {
   },
 
   resolve: {
+    extensions: ['.js', '.vue', '.svg', '.pdf', '.png', '.ico'],
     alias: {
       'public': path.resolve(__dirname, 'public'),
       '~': __dirname
@@ -55,6 +56,10 @@ module.exports = {
       {
         test: /\.pug$/,
         loader: 'pug-loader'
+      },
+      {
+        test: /\.styl$/,
+        loader: ['style', 'css', 'stylus']
       }
     ]
   },

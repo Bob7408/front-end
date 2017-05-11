@@ -1,3 +1,6 @@
 <template lang="pug">
-  h1 Hello!
+  .home
+    section.intro
+    section.events
+    section.last-articles
 </template>
