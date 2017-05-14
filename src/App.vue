@@ -3,14 +3,14 @@
     header
       nav
         .left
-          router-link(to='/') Index
-          router-link(to='/nous') Nous
-          router-link(to='/articles') Blog
-          router-link(to='/activites') Activités
-          router-link(to='/agenda') Agenda
+          router-link(to='/') Index #[.border]
+          router-link(to='/nous') Nous #[.border]
+          router-link(to='/articles') Blog #[.border]
+          router-link(to='/activites') Activités #[.border]
+          router-link(to='/agenda') Agenda #[.border]
       
         .right
-          router-link(to='/admin') Administration
+          a(href='/admin'): v-icon(title='Administration') vpn_key
     
     .content
       transition(name='fade', mode='out-in'): router-view.view
@@ -30,12 +30,12 @@
         v-card-title Partenaires
         v-card-text
           ul.box
-            li: a(href='http://www.paris.fr/') Mairie de Paris
-            li: a(href='http://www.iledefrance.fr/') Île de France
+            li: a(href='http://www.paris.fr/') #[v-icon(left) account_balance] Mairie de Paris
+            li: a(href='http://www.iledefrance.fr/') #[v-icon(left) account_balance] Île de France
           ul.box
-            li: a(href='http://www.art-pi.fr/') Magazine: Art'Pi
-            li: a(href='http://bdtemoinssilencieux.blogspot.fr/') BD: Les Témoins Silencieux
-      
+            li: a(href='http://www.art-pi.fr/') #[v-icon(left) book] Magazine: Art'Pi
+            li: a(href='http://bdtemoinssilencieux.blogspot.fr/') #[v-icon(left) book] BD: Les Témoins Silencieux
+
       span.infos
         a(href='https://github.com/6A/art-sign') Source
         |  - 
@@ -58,22 +58,22 @@
         v-dialog(v-model='dgive', width='auto')
           a(href='javascript:void(0);', slot='activator') Faire un don
           v-card
-            v-card-row: v-card-title Faire un don
+            v-card-row: v-card-title #[v-icon.red--text(left) favorite] Faire un don
             v-divider
-            v-card-row: v-card-text: v-list(two-line)
-              v-list-item: v-list-tile: v-list-tile-content
-                v-list-tile-title Les entreprises
-                v-list-tile-sub-title.
-                  Les dons effectués par une entreprise soumise à l'impôt sur les sociétés ou à l'impôt sur le revenu peuvent ouvrir droit à une réduction d'impôt égale à 60% des sommes versées.
-              v-list-item: v-list-tile: v-list-tile-content
-                v-list-tile-title Les particuliers
-                v-list-tile-sub-title.
-                  Les dons ouvrent droit à une réduction d'impôt égale à 66% des versements, dans la limite de 20% du revenu imposable. #[br]
-                  A réception d'un don, Art'Sign fera parvenir au donateur un "Reçu de dons aux oeuvres" dûment rempli.
+            v-card-row: v-card-text(style='text-align: justify')
+              p.title Les entreprises
+              p.
+                Les dons effectués par une entreprise soumise à l'impôt sur les sociétés ou à l'impôt sur le revenu peuvent ouvrir droit à une réduction d'impôt égale à 60% des sommes versées.
+              br
+              p.title Les particuliers
+              p.
+                Les dons ouvrent droit à une réduction d'impôt égale à 66% des versements, dans la limite de 20% du revenu imposable. #[br]
+                A réception d'un don, Art'Sign fera parvenir au donateur un "Reçu de dons aux oeuvres" dûment rempli.
             v-card-row
-              v-card-text: a(href='/public/donner.pdf') Télécharger le formulaire en cliquant ici.
-            v-card-row
-              v-card-text: a(href='https://www.paypal.com/cgi-bin/webscr?hosted_button_id=UTWAPA6V8NHSU&cmd=_s-xclick') Donner avec PayPal
+              v-card-text
+                v-btn(light, flat): a(href='/public/donner.pdf', target='_blank') Télécharger le formulaire (.pdf)
+                br
+                v-btn(light, flat): a(href='https://www.paypal.com/cgi-bin/webscr?hosted_button_id=UTWAPA6V8NHSU&cmd=_s-xclick', target='_blank') Donner avec PayPal
             v-divider
             v-card-row(actions)
               v-btn(flat, @click.native='dgive = false') Fermer
@@ -83,6 +83,7 @@
 export default {
   data() {
     return {
+      dgive: false,
       dpresse: false
     }
   }
@@ -110,6 +111,8 @@ header, footer
 
 header
   position: fixed
+  display: flex
+  align-items: center
   top: 0
   left: 0
   right: 0
@@ -117,6 +120,8 @@ header
 
   nav
     center()
+    width: 100%
+    color: white
 
     .left
       float: left
@@ -126,6 +131,22 @@ header
     a
       display: inline-block
       margin: 1em
+      opacity: .9
+
+      &.link-active
+        opacity: 1
+
+      &:hover .border
+        transform: translateY(3px)
+
+      .border
+        bottom: 0
+        left: 0
+        width: 100%
+        height: 2px
+        background: #ffffff
+        transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+        opacity: .8
 
 footer
   color: white
@@ -133,6 +154,10 @@ footer
   padding: 2em
   font-size: 1.1em
   text-align: center
+
+  & > *
+    min-width: 512px
+
 
   h2
     text-transform: uppercase
@@ -143,10 +168,13 @@ footer
     display: inline-block
     color: $primary-text
     padding-bottom: .6em
-    column(1/2)
+    width: 46%
+    margin: 0 1% 0 0
 
-    &:last-of-type
-      margin-right: 0%
+    &.card
+      min-width: 512px
+      margin: 0 1% .4em 0
+      text-align: left
 
     li
       list-style: none
@@ -163,6 +191,7 @@ footer
   .infos
     margin: .8em 0 0 0
     display: inline-block
+    text-align: center
     
     a
       vertical-align: top
@@ -181,58 +210,4 @@ footer
     text-align: center
     display: inline-block
     margin-top: 20vh
-
-.header
-  background-color #ff6600
-  position fixed
-  z-index 999
-  height 55px
-  .inner
-    max-width 800px
-    box-sizing border-box
-    margin 0px auto
-    padding 15px 5px
-  a
-    color rgba(255, 255, 255, .8)
-    line-height 24px
-    transition color .15s ease
-    display inline-block
-    vertical-align middle
-    font-weight 300
-    letter-spacing .075em
-    margin-right 1.8em
-    &:hover
-      color #fff
-    &.router-link-active
-      color #fff
-      font-weight 400
-    &:nth-child(6)
-      margin-right 0
-  .github
-    color #fff
-    font-size .9em
-    margin 0
-    float right
-.logo
-  width 24px
-  margin-right 10px
-  display inline-block
-  vertical-align middle
-.fade-enter-active, .fade-leave-active
-  transition all .2s ease
-.fade-enter, .fade-leave-active
-  opacity 0
-@media (max-width 860px)
-  .header .inner
-    padding 15px 30px
-@media (max-width 600px)
-  body
-    font-size 14px
-  .header
-    .inner
-      padding 15px
-    a
-      margin-right 1em
-    .github
-      display none
 </style>

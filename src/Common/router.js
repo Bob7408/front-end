@@ -22,7 +22,7 @@ export default new Router({
     { path: '/', component: HomeView },
     { path: '/nous', component: AboutView, alias: '/us' },
     { path: '/blog', component: BlogView,  alias: '/articles' },
-    { path: '/article/:id', component: ArticleView },
+    { path: '/article/:id', component: ArticleView, props: true },
     { path: '/calendrier', component: CalendarView, alias: '/agenda' },
     { path: '/activites', component: ActivitiesView },
     { path: '/*', component: NotFoundView }

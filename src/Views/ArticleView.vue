@@ -1,19 +1,28 @@
 <template lang="pug">
   .article
-    h1 {{ title }}
-    h2 {{ date_0 }} {{ date_1 }}
+    h1 {{ article.title }}
+    h2 {{ readableDate(article.pub_date) }}
 
-    img(@src='logo')
-    p(v-html='content')
+    img(@src='article.logo')
+    p(v-html='article.content')
 </template>
 
 <script>
 export default {
-  data() {
-    return {
+  props: ['id'],
 
+  data: () => ({
+    article: {}
+  }),
+
+  mounted() {
+    this.refresh()
+  },
+
+  methods: {
+    refresh() {
+      this.$http.get('article/' + this.id).then(response => response.json()).then(article => this.article = article)
     }
   }
-
 }
 </script>
