@@ -4,10 +4,14 @@
       nav
         .left
           router-link(to='/') Index #[.border]
-          router-link(to='/nous') Nous #[.border]
+          router-link(to='/nous') Qui sommes-nous ? #[.border]
           router-link(to='/articles') Blog #[.border]
-          router-link(to='/activites') Activités #[.border]
+          router-link(to='/activites') Nos activités #[.border]
+          router-link(to='/participation') Participez ! #[.border]
+          router-link(to='/services') Nos services #[.border]
           router-link(to='/agenda') Agenda #[.border]
+          
+          router-link(to='/contact') Contact #[.border]
       
         .right
           a(href='/admin'): v-icon(title='Administration') vpn_key
