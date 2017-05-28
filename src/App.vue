@@ -12,6 +12,7 @@
           router-link(to='/agenda') Agenda #[.border]
           
           router-link(to='/contact') Contact #[.border]
+          router-link(to='/adhesion') Adhésion #[.border]
       
         .right
           a(href='/admin'): v-icon(title='Administration') vpn_key

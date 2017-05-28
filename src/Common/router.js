@@ -13,6 +13,7 @@ const ParicipateView = () => System.import('../Views/ParticipateView.vue');
 const ContactView    = () => System.import('../Views/ContactView.vue');
 const PartnerView    = () => System.import('../Views/PartnerView.vue');
 const ServicesView   = () => System.import('../Views/ServicesView.vue');
+const AdhesionView   = () => System.import('../Views/AdhesionView.vue');
 const NotFoundView   = () => System.import('../Views/404View.vue');
 
 export default new Router({
@@ -33,6 +34,7 @@ export default new Router({
     { path: '/contact', component: ContactView },
     { path: '/partenaires', component: PartnerView },
     { path: '/services', component: ServicesView },
+    { path: '/adhesion', component: AdhesionView },
     { path: '/*', component: NotFoundView }
   ]
 })
